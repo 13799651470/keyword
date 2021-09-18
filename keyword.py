@@ -54,9 +54,9 @@ ifelseifelsenum=0
 for line in file.readlines():
     line=re.split(r'[\s\,\;\:\(\)\{\}]+',line)
     totalnum+=row_totalnum(line)
-    if(way>=2):
+    if way>=2:
         switchnum+=row_switchnum(line)
-        if(way>=3):
+        if way>=3:
             if row_switchnum(line)!=0:
                 if casenum!=0:
                     if casenums[-1]==0:
@@ -66,6 +66,40 @@ for line in file.readlines():
                 else:
                     pass
             casenum+=row_casenum(line)
+            if way>=4:
+                for word in line:
+                    elseifflag=0
+                    if word=='if':
+                        flag=1
+                        for x in line:
+                            print(x)
+                            if x=='else':
+                                flag=0
+                                elseifflag=1
+                                break
+                    if elseifflag==1:
+                        continue
+                    if word =='elif':
+                        flag=0
+                        continue
+                    if word =='else':
+                        for y in line:
+                            if y=='if':
+                                break
+                        if y =='if':
+                            continue
+            
+                        if flag==1:
+                            ifelsenum+=1
+                            print('ifelsenum: ',ifelsenum)
+                            print(line)
+                        else:
+                            ifelseifelsenum+=1
+                            print('ifelseifelsenum: ',ifelseifelsenum)
+                            print(line)
+                            
+                        
+
 
 
 
