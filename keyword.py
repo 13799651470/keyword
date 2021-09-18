@@ -2,6 +2,34 @@ import re
 # D:\learnpython\test.cpp
 
 from os import replace
+def output(way):
+    if way>=1 and way<=5:
+        if 1 <=way:
+            print('total num: ',totalnum)
+        if 2<=way:
+            print('switch num: ',switchnum)
+        if 3<=way:
+            print('case num: ',casenums)
+        if 4<=way:
+            print('if-else num: ',ifelsenum)
+        if 5<=way:
+            print('if-elseif-else num: ',ifelseifelsenum)
+    else:
+        print('error!')
+
+def row_totalnum(line):
+    num=0
+    for word in line:
+        if word in keyword:
+            num+=1
+    return num
+
+def row_switchnum(line):
+    num=0
+    for word in line:
+        if word=='switch':
+            num+=1
+    return num  
 
 
 path=input("the path to the file: ")
@@ -10,32 +38,40 @@ file=open(path)
 keyword=('auto','break','case','char','const','continue','default','do','double','else','enum','extern','float','for','goto','if','int','long','register','return','short','signed','sizeof','static','struct','switch','typedef','union','unsigned','void','volatile','while')
 totalnum=0
 switchnum=0
+casenums=[]
 casenum=0
 ifelsenum=0
 ifelseifelsenum=0
 for line in file.readlines():
     line=re.split(r'[\s\,\;\:\(\)\{\}]+',line)
-    for word in keyword:
-        if word in line:
-            totalnum+=1
-            if word=='switch':
-                switchnum+=1
-            if word=='case':
-                casenum+=1
+    totalnum+=row_totalnum(line)
+    if(way>=2):
+        switchnum+=row_switchnum(line)
+        if(way>=3):
+            pass
+            
+    # for word in keyword:
+    #     if word in line:
+    #         totalnum+=1
+    #         if word=='switch':
+    #             switchnum+=1
+    #         if word=='case':
+    #             casenum+=1
 
-if way>=1 and way<=5:
-    if 1 <=way:
-        print('total num: ',totalnum)
-    if 2<=way:
-        print('switch num: ',switchnum)
-    if 3<=way:
-        print('case num: ',casenum)
-    if 4<=way:
-        print('if-else num: ',ifelsenum)
-    if 5<=way:
-        print('if-elseif-else num: ',ifelseifelsenum)
-else:
-    print('error!')
+output(way)
+# if way>=1 and way<=5:
+#     if 1 <=way:
+#         print('total num: ',totalnum)
+#     if 2<=way:
+#         print('switch num: ',switchnum)
+#     if 3<=way:
+#         print('case num: ',casenum)
+#     if 4<=way:
+#         print('if-else num: ',ifelsenum)
+#     if 5<=way:
+#         print('if-elseif-else num: ',ifelseifelsenum)
+# else:
+#     print('error!')
 
 
 
